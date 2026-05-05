@@ -1,0 +1,735 @@
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="auth/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="auth/page.tsx">
+                  <SegmentTrieNode>
+                  <AuthPage>
+                    <main className="mx-auto fl...">
+                      <div className="grid w-ful...">
+                        <section>
+                        <section className="panel orde...">
+                          <LoginForm>
+                            <div className="space-y-6">
+                              <div className="space-y-3">
+                                <span>
+                                <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
++                                 Sign in, upload your chemistry materials, and turn them into a personal academic brain.
+-                                 Sign in and study faster.
+                                ...
+                              ...
+                ...
+              ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3318:56)
+    at prepareToHydrateHostInstance (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3372:23)
+    at completeWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6922:60)
+    at runWithFiberInDEV (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64)
+    at h2 (<anonymous>)
+    at LoginForm (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_login-form_tsx_0ur4902._.js:96:223)
+    at AuthPage (src\app\auth\page.tsx:79:11)
+  77 |
+  78 |         <section className="panel order-1 px-6 py-8 md:px-8 md:py-10 xl:order-2">
+> 79 |           <LoginForm />
+     |           ^
+  80 |         </section>
+  81 |       </div>
+  82 |     </main>
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="auth/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="auth/page.tsx">
+                  <SegmentTrieNode>
+                  <AuthPage>
+                    <main className="mx-auto fl...">
+                      <div className="grid w-ful...">
+                        <section>
+                        <section className="panel orde...">
+                          <LoginForm>
+                            <div className="space-y-6">
+                              <div className="space-y-3">
+                                <span>
+                                <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
++                                 Sign in, upload your chemistry materials, and turn them into a personal academic brain.
+-                                 Sign in and study faster.
+                                ...
+                              ...
+                ...
+              ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3318:56)
+    at prepareToHydrateHostInstance (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3372:23)
+    at completeWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6922:60)
+    at runWithFiberInDEV (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64)
+    at h2 (<anonymous>)
+    at LoginForm (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_login-form_tsx_0ur4902._.js:96:223)
+    at AuthPage (src\app\auth\page.tsx:79:11)
+  77 |
+  78 |         <section className="panel order-1 px-6 py-8 md:px-8 md:py-10 xl:order-2">
+> 79 |           <LoginForm />
+     |           ^
+  80 |         </section>
+  81 |       </div>
+  82 |     </main>
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="auth/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="auth/page.tsx">
+                  <SegmentTrieNode>
+                  <AuthPage>
+                    <main className="mx-auto fl...">
+                      <div className="grid w-ful...">
+                        <section>
+                        <section className="panel orde...">
+                          <LoginForm>
+                            <div className="space-y-6">
+                              <div className="space-y-3">
+                                <span>
+                                <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
++                                 Sign in, upload your chemistry materials, and turn them into a personal academic brain.
+-                                 Sign in and study faster.
+                                ...
+                              ...
+                ...
+              ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3318:56)
+    at prepareToHydrateHostInstance (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3372:23)
+    at completeWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6922:60)
+    at runWithFiberInDEV (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64)
+    at h2 (<anonymous>)
+    at LoginForm (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_login-form_tsx_0ur4902._.js:96:223)
+    at AuthPage (src\app\auth\page.tsx:79:11)
+  77 |
+  78 |         <section className="panel order-1 px-6 py-8 md:px-8 md:py-10 xl:order-2">
+> 79 |           <LoginForm />
+     |           ^
+  80 |         </section>
+  81 |       </div>
+  82 |     </main>
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="auth/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="auth/page.tsx">
+                  <SegmentTrieNode>
+                  <AuthPage>
+                    <main className="mx-auto fl...">
+                      <div className="grid w-ful...">
+                        <section>
+                        <section className="panel orde...">
+                          <LoginForm>
+                            <div className="space-y-6">
+                              <div className="space-y-3">
+                                <span>
+                                <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
++                                 Sign in, upload your chemistry materials, and turn them into a personal academic brain.
+-                                 Sign in and study faster.
+                                ...
+                              ...
+                ...
+              ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3318:56)
+    at prepareToHydrateHostInstance (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3372:23)
+    at completeWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6922:60)
+    at runWithFiberInDEV (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64)
+    at h2 (<anonymous>)
+    at LoginForm (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_login-form_tsx_0ur4902._.js:96:223)
+    at AuthPage (src\app\auth\page.tsx:79:11)
+  77 |
+  78 |         <section className="panel order-1 px-6 py-8 md:px-8 md:py-10 xl:order-2">
+> 79 |           <LoginForm />
+     |           ^
+  80 |         </section>
+  81 |       </div>
+  82 |     </main>
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="auth/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="auth/page.tsx">
+                  <SegmentTrieNode>
+                  <AuthPage>
+                    <main className="mx-auto fl...">
+                      <div className="grid w-ful...">
+                        <section>
+                        <section className="panel orde...">
+                          <LoginForm>
+                            <div className="space-y-6">
+                              <div className="space-y-3">
+                                <span>
+                                <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
++                                 Sign in, upload your chemistry materials, and turn them into a personal academic brain.
+-                                 Sign in and study faster.
+                                ...
+                              ...
+                ...
+              ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3318:56)
+    at prepareToHydrateHostInstance (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3372:23)
+    at completeWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6922:60)
+    at runWithFiberInDEV (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64)
+    at h2 (<anonymous>)
+    at LoginForm (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_login-form_tsx_0ur4902._.js:96:223)
+    at AuthPage (src\app\auth\page.tsx:79:11)
+  77 |
+  78 |         <section className="panel order-1 px-6 py-8 md:px-8 md:py-10 xl:order-2">
+> 79 |           <LoginForm />
+     |           ^
+  80 |         </section>
+  81 |       </div>
+  82 |     </main>
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="layout" pagePath="dashboard/...">
+      <SegmentTrieNode>
+      <script>
+      <script>
+      <script>
+      <DashboardLayout>
+        <DashboardShell user={{id:"user_c...", ...}}>
+          <main className="relative m...">
+            <div>
+            <div>
+            <div>
+            <div className="mx-auto fl...">
+              <motion.aside initial={{opacity:0,x:-24}} animate={{opacity:1,x:0}} className="panel hidd...">
+                <aside className="panel hidd..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                  <div className="space-y-6">
+                    <BrandLockup compact={true}>
+                      <div className="flex items...">
+                        <div>
+                        <div className="space-y-2">
+                          <div>
+                            <p>
+                            <h1 className="mt-3 font-semibold tracking-tight text-ink text-2xl">
++                             Industrial chemistry notes, revision, lab reports, and exam prediction in one brilliant s...
+-                             Your chemistry study OS.
+                    ...
+                  ...
+              ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3318:56)
+    at prepareToHydrateHostInstance (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3372:23)
+    at completeWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6922:60)
+    at runWithFiberInDEV (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64)
+    at h1 (<anonymous>)
+    at BrandLockup (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_04~33.x._.js:49:231)
+    at DashboardShell (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_04~33.x._.js:370:239)
+    at DashboardLayout (src\app\dashboard\layout.tsx:13:10)
+  11 |   const session = await requirePageSession(["student", "mentor", "super_admin", "cashier"]);
+  12 |
+> 13 |   return <DashboardShell user={session.user}>{children}</DashboardShell>;
+     |          ^
+  14 | }
+  15 |
+[browser] Uncaught Error: Hydration failed because the server rendered text didn't match the client. As a result this tree will be regenerated on the client. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="auth/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/auth" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="auth/page.tsx">
+                  <SegmentTrieNode>
+                  <AuthPage>
+                    <main className="mx-auto fl...">
+                      <div className="grid w-ful...">
+                        <section>
+                        <section className="panel orde...">
+                          <LoginForm>
+                            <div className="space-y-6">
+                              <div className="space-y-3">
+                                <span>
+                                <h2 className="text-2xl font-semibold tracking-tight text-ink md:text-3xl">
++                                 Sign in, upload your chemistry materials, and turn them into a personal academic brain.
+-                                 Sign in and study faster.
+                                ...
+                              ...
+                ...
+              ...
+
+    at <unknown> (https://react.dev/link/hydration-mismatch)
+    at throwOnHydrationMismatch (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3318:56)
+    at prepareToHydrateHostInstance (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:3372:23)
+    at completeWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:6922:60)
+    at runWithFiberInDEV (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:965:74)
+    at completeUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9622:23)
+    at performUnitOfWork (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9557:28)
+    at workLoopConcurrentByScheduler (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9551:58)
+    at renderRootConcurrent (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9534:71)
+    at performWorkOnRoot (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:9061:150)
+    at performWorkOnRootViaSchedulerTask (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_react-dom_058-ah~._.js:10255:9)
+    at MessagePort.performWorkUntilDeadline (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/node_modules_next_dist_compiled_0rpq4pf._.js:2647:64)
+    at h2 (<anonymous>)
+    at LoginForm (file://C:/Users/user/Documents/New project/.next/dev/static/chunks/src_components_login-form_tsx_0ur4902._.js:96:223)
+    at AuthPage (src\app\auth\page.tsx:79:11)
+  77 |
+  78 |         <section className="panel order-1 px-6 py-8 md:px-8 md:py-10 xl:order-2">
+> 79 |           <LoginForm />
+     |           ^
+  80 |         </section>
+  81 |       </div>
+  82 |     </main>
+⨯ Error [DriverAdapterError]: bind message supplies 3 parameters, but prepared statement "" requires 0
+    at async updateLastLogin (src\lib\chemate\service.ts:878:3)
+    at async POST (src\app\api\auth\login\route.ts:53:3)
+  876 |
+  877 | export async function updateLastLogin(userId: string) {
+> 878 |   await prisma.user.update({
+      |   ^
+  879 |     where: {
+  880 |       id: userId,
+  881 |     }, {
+  clientVersion: '7.8.0',
+  [cause]: {
+    originalCode: '08P01',
+    originalMessage: 'bind message supplies 3 parameters, but prepared statement "" requires 0',
+    kind: 'postgres',
+    code: '08P01',
+    severity: 'ERROR',
+    message: 'bind message supplies 3 parameters, but prepared statement "" requires 0',
+    detail: undefined,
+    column: undefined,
+    hint: undefined
+  }
+}
+⨯ Error: Connection terminated unexpectedly
+    at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+    at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+    at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+  250 |
+  251 | export async function getUserWorkspace(userId: string) {
+> 252 |   const [course, uploads, artifacts, activities] = await Promise.all([
+      |                                                    ^
+  253 |     getHomeCourse(),
+  254 |     prisma.upload.findMany({
+  255 |       where: { {
+  clientVersion: '7.8.0',
+  digest: '1695636648'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].upload.findMany()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0w2n5zs._.js:262:143
+
+  259 async function getUserWorkspace(userId) {
+  260     const [course, uploads, artifacts, activities] = await Promise.all([
+  261         getHomeCourse(),
+→ 262         {imported module ./src/lib/prisma.ts}["prisma"].upload.findMany(
+Server has closed the connection.
+    at <unknown> (src\lib\chemate\service.ts:254:19)
+    at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+    at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+    at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+  252 |   const [course, uploads, artifacts, activities] = await Promise.all([
+  253 |     getHomeCourse(),
+> 254 |     prisma.upload.findMany({
+      |                   ^
+  255 |       where: {
+  256 |         userId,
+  257 |         courseId: PRIMARY_COURSE_ID, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Upload',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+        at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+        at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+      250 |
+      251 | export async function getUserWorkspace(userId: string) {
+    > 252 |   const [course, uploads, artifacts, activities] = await Promise.all([
+          |                                                    ^
+      253 |     getHomeCourse(),
+      254 |     prisma.upload.findMany({
+      255 |       where: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '1214182459'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].upload.findMany()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0w2n5zs._.js:262:143
+
+  259 async function getUserWorkspace(userId) {
+  260     const [course, uploads, artifacts, activities] = await Promise.all([
+  261         getHomeCourse(),
+→ 262         {imported module ./src/lib/prisma.ts}["prisma"].upload.findMany(
+Server has closed the connection.
+    at <unknown> (src\lib\chemate\service.ts:254:19)
+    at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+    at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+    at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+  252 |   const [course, uploads, artifacts, activities] = await Promise.all([
+  253 |     getHomeCourse(),
+> 254 |     prisma.upload.findMany({
+      |                   ^
+  255 |       where: {
+  256 |         userId,
+  257 |         courseId: PRIMARY_COURSE_ID, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Upload',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+        at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+        at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+      250 |
+      251 | export async function getUserWorkspace(userId: string) {
+    > 252 |   const [course, uploads, artifacts, activities] = await Promise.all([
+          |                                                    ^
+      253 |     getHomeCourse(),
+      254 |     prisma.upload.findMany({
+      255 |       where: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '1214182459'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].artifact.findMany()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0w2n5zs._.js:277:145
+
+  274         pages: true
+  275     }
+  276 }),
+→ 277 {imported module ./src/lib/prisma.ts}["prisma"].artifact.findMany(
+Server has closed the connection.
+    at <unknown> (src\lib\chemate\service.ts:269:21)
+    at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+    at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+    at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+  267 |       },
+  268 |     }),
+> 269 |     prisma.artifact.findMany({
+      |                     ^
+  270 |       where: {
+  271 |         userId,
+  272 |         courseId: PRIMARY_COURSE_ID, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Artifact',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+        at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+        at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+      250 |
+      251 | export async function getUserWorkspace(userId: string) {
+    > 252 |   const [course, uploads, artifacts, activities] = await Promise.all([
+          |                                                    ^
+      253 |     getHomeCourse(),
+      254 |     prisma.upload.findMany({
+      255 |       where: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '805608120'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].course.findUniqueOrThrow()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0w2n5zs._.js:216:146
+
+  213     });
+  214 }
+  215 async function getHomeCourse() {
+→ 216     return {imported module ./src/lib/prisma.ts}["prisma"].course.findUniqueOrThrow(
+Server has closed the connection.
+    at <unknown> (src\lib\chemate\service.ts:198:24)
+    at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+    at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+    at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+  196 |
+  197 | export async function getHomeCourse() {
+> 198 |   return prisma.course.findUniqueOrThrow({
+      |                        ^
+  199 |     where: {
+  200 |       id: PRIMARY_COURSE_ID,
+  201 |     }, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Course',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at ignore-listed frames {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '4036887290'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].session.findUnique()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0_kxxw8._.js:240:162
+
+  237 if (!currentToken) {
+  238     return null;
+  239 }
+→ 240 const session = await {imported module ./src/lib/prisma.ts}["prisma"].session.findUnique(
+Server has closed the connection.
+    at <unknown> (src\lib\auth\session.ts:112:40)
+    at async getCurrentSession (src\lib\auth\session.ts:112:19)
+    at async requirePageSession (src\lib\auth\session.ts:166:19)
+    at async DashboardLayout (src\app\dashboard\layout.tsx:11:19)
+  110 |   }
+  111 |
+> 112 |   const session = await prisma.session.findUnique({
+      |                                        ^
+  113 |     where: {
+  114 |       tokenHash: hashSessionToken(currentToken),
+  115 |     }, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Session',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at ignore-listed frames {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '1024084586'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].session.findUnique()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0_kxxw8._.js:240:162
+
+  237 if (!currentToken) {
+  238     return null;
+  239 }
+→ 240 const session = await {imported module ./src/lib/prisma.ts}["prisma"].session.findUnique(
+Server has closed the connection.
+    at <unknown> (src\lib\auth\session.ts:112:40)
+    at async getCurrentSession (src\lib\auth\session.ts:112:19)
+    at async requirePageSession (src\lib\auth\session.ts:166:19)
+    at async DashboardPage (src\app\dashboard\page.tsx:16:19)
+  110 |   }
+  111 |
+> 112 |   const session = await prisma.session.findUnique({
+      |                                        ^
+  113 |     where: {
+  114 |       tokenHash: hashSessionToken(currentToken),
+  115 |     }, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Session',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at ignore-listed frames {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '2219802588'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].course.findUniqueOrThrow()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0w2n5zs._.js:216:146
+
+  213     });
+  214 }
+  215 async function getHomeCourse() {
+→ 216     return {imported module ./src/lib/prisma.ts}["prisma"].course.findUniqueOrThrow(
+Server has closed the connection.
+    at <unknown> (src\lib\chemate\service.ts:198:24)
+    at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+    at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+    at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+  196 |
+  197 | export async function getHomeCourse() {
+> 198 |   return prisma.course.findUniqueOrThrow({
+      |                        ^
+  199 |     where: {
+  200 |       id: PRIMARY_COURSE_ID,
+  201 |     }, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Course',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at ignore-listed frames {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '4036887290'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/prisma.ts}["prisma"].course.findUniqueOrThrow()` invocation in
+C:\Users\user\Documents\New project\.next\dev\server\chunks\ssr\[root-of-the-server]__0w2n5zs._.js:216:146
+
+  213     });
+  214 }
+  215 async function getHomeCourse() {
+→ 216     return {imported module ./src/lib/prisma.ts}["prisma"].course.findUniqueOrThrow(
+Server has closed the connection.
+    at <unknown> (src\lib\chemate\service.ts:198:24)
+    at async getUserWorkspace (src\lib\chemate\service.ts:252:52)
+    at async getStudyAnalytics (src\lib\chemate\service.ts:751:21)
+    at async DashboardPage (src\app\dashboard\page.tsx:17:21)
+  196 |
+  197 | export async function getHomeCourse() {
+> 198 |   return prisma.course.findUniqueOrThrow({
+      |                        ^
+  199 |     where: {
+  200 |       id: PRIMARY_COURSE_ID,
+  201 |     }, {
+  code: 'P1017',
+  meta: {
+    modelName: 'Course',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at ignore-listed frames {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.8.0',
+  digest: '4036887290'
+}

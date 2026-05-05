@@ -1,0 +1,470 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
+  super_admin
+  cashier
+  student
+  mentor
+}
+
+enum RateUnit {
+  hour
+  day
+}
+
+enum LeaseStatus {
+  leased_out
+  overdue
+  returned
+}
+
+enum PaymentStatus {
+  pending
+  paid
+}
+
+enum ReceiptType {
+  sale
+  lease
+}
+
+enum InventoryChangeReason {
+  initial_stock
+  restock
+  sale
+  adjustment
+}
+
+enum AuthProvider {
+  email
+  google
+  github
+  microsoft
+}
+
+enum AiProvider {
+  mock
+  openai
+  gemini
+}
+
+enum UploadKind {
+  note
+  question
+  lab_manual
+  assignment
+}
+
+enum UploadStatus {
+  ready
+  queued_processing
+  archived
+}
+
+enum ArtifactType {
+  answer
+  summary
+  flashcards
+  quiz
+  exam_prediction
+  lab_report
+  calculation
+}
+
+enum KnowledgeMode {
+  notes_only
+  external
+}
+
+enum StudyActivityKind {
+  upload
+  reading
+  summary
+  question
+  prediction
+  lab_report
+  revision
+  calculation
+  group
+  call
+  discussion
+}
+
+enum StudyGroupRole {
+  owner
+  moderator
+  member
+}
+
+enum StudyGroupVisibility {
+  private
+  public_discoverable
+}
+
+enum CallMode {
+  audio
+  video
+}
+
+model User {
+  id             String         @id @default(cuid())
+  name           String
+  email          String         @unique
+  username       String         @unique
+  role           UserRole       @default(student)
+  passwordHash   String?
+  provider       AuthProvider   @default(email)
+  googleId       String?        @unique
+  githubId       String?        @unique
+  microsoftId    String?        @unique
+  avatarUrl      String?
+  school         String?
+  preferredTheme String         @default("system")
+  preferredAi    AiProvider     @default(mock)
+  isActive       Boolean        @default(true)
+  lastLoginAt    DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  sessions       Session[]
+  createdSales   Sale[]         @relation("SaleCashier")
+  createdLeases  Lease[]        @relation("LeaseCashier")
+  inventoryLogs  InventoryLog[] @relation("InventoryActor")
+  issuedReceipts Receipt[]      @relation("ReceiptIssuer")
+  uploads        Upload[]
+  artifacts      Artifact[]
+  activities     StudyActivity[]
+  enrollments    Enrollment[]
+  studyGroupsOwned StudyGroup[] @relation("StudyGroupOwner")
+  groupMemberships StudyGroupMember[]
+  groupMessages  GroupMessage[]
+  groupCallsCreated GroupCallRoom[] @relation("GroupCallCreator")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, expiresAt])
+}
+
+model Customer {
+  id          String   @id @default(cuid())
+  fullName    String
+  phoneNumber String
+  idNumber    String?
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  leases      Lease[]
+  sales       Sale[]
+
+  @@index([phoneNumber])
+  @@index([idNumber])
+}
+
+model Machine {
+  id                 String   @id @default(cuid())
+  name               String
+  slug               String   @unique
+  category           String
+  description        String?
+  defaultRateInCents Int
+  rateUnit           RateUnit
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  leases             Lease[]
+}
+
+model DetergentProduct {
+  id                    String         @id @default(cuid())
+  name                  String
+  sku                   String         @unique
+  description           String?
+  pricePerLiterInCents  Int
+  stockInMl             Int
+  lowStockThresholdInMl Int            @default(5000)
+  isActive              Boolean        @default(true)
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  saleItems             SaleItem[]
+  inventoryLogs         InventoryLog[]
+}
+
+model InventoryLog {
+  id                 String                @id @default(cuid())
+  productId          String
+  userId             String
+  reason             InventoryChangeReason
+  quantityChangeInMl Int
+  balanceAfterInMl   Int
+  notes              String?
+  createdAt          DateTime              @default(now())
+  product            DetergentProduct      @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user               User                  @relation("InventoryActor", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([productId, createdAt])
+}
+
+model Sale {
+  id                String     @id @default(cuid())
+  saleNumber        String     @unique
+  customerId        String?
+  cashierId         String
+  subtotalInCents   Int
+  totalInCents      Int
+  amountPaidInCents Int
+  notes             String?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  customer          Customer?  @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  cashier           User       @relation("SaleCashier", fields: [cashierId], references: [id], onDelete: Restrict)
+  lineItems         SaleItem[]
+  receipt           Receipt?
+
+  @@index([createdAt])
+}
+
+model SaleItem {
+  id                  String           @id @default(cuid())
+  saleId              String
+  productId           String
+  productNameSnapshot String
+  quantityInMl        Int
+  unitPriceInCents    Int
+  lineTotalInCents    Int
+  sale                Sale             @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  product             DetergentProduct @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([saleId])
+}
+
+model Lease {
+  id                 String        @id @default(cuid())
+  leaseNumber        String        @unique
+  machineId          String
+  customerId         String
+  cashierId          String
+  notes              String?
+  dateOut            DateTime
+  expectedReturnDate DateTime
+  actualReturnDate   DateTime?
+  rateInCents        Int
+  rateUnit           RateUnit
+  billableUnits      Int?
+  totalAmountInCents Int?
+  status             LeaseStatus   @default(leased_out)
+  paymentStatus      PaymentStatus @default(pending)
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  machine            Machine       @relation(fields: [machineId], references: [id], onDelete: Restrict)
+  customer           Customer      @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  cashier            User          @relation("LeaseCashier", fields: [cashierId], references: [id], onDelete: Restrict)
+  receipt            Receipt?
+
+  @@index([status, expectedReturnDate])
+  @@index([createdAt])
+}
+
+model Receipt {
+  id            String      @id @default(cuid())
+  receiptNumber String      @unique
+  type          ReceiptType
+  saleId        String?     @unique
+  leaseId       String?     @unique
+  issuedById    String
+  createdAt     DateTime    @default(now())
+  sale          Sale?       @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  lease         Lease?      @relation(fields: [leaseId], references: [id], onDelete: Cascade)
+  issuedBy      User        @relation("ReceiptIssuer", fields: [issuedById], references: [id], onDelete: Restrict)
+
+  @@index([type, createdAt])
+}
+
+model Course {
+  id          String          @id
+  title       String
+  code        String          @unique
+  description String?
+  semester    String?
+  level       String?
+  colorKey    String?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  uploads     Upload[]
+  artifacts   Artifact[]
+  activities  StudyActivity[]
+  enrollments Enrollment[]
+}
+
+model Enrollment {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@index([courseId])
+}
+
+model Upload {
+  id          String       @id @default(cuid())
+  userId      String
+  courseId    String
+  kind        UploadKind
+  title       String
+  topic       String
+  description String?
+  fileName    String?
+  mimeType    String?
+  content     String
+  summary     String?
+  formulas    Json?
+  structures  Json?
+  tags        String[]
+  status      UploadStatus @default(ready)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  pages       UploadPage[]
+  citations   Citation[]
+
+  @@index([userId, kind, createdAt])
+  @@index([courseId, topic])
+}
+
+model UploadPage {
+  id           String    @id @default(cuid())
+  uploadId     String
+  pageNumber   Int
+  sectionTitle String?
+  content      String
+  createdAt    DateTime  @default(now())
+  upload       Upload    @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  citations    Citation[]
+
+  @@unique([uploadId, pageNumber])
+}
+
+model Artifact {
+  id            String        @id @default(cuid())
+  userId        String
+  courseId      String
+  type          ArtifactType
+  title         String
+  prompt        String?
+  body          String
+  payload       Json?
+  knowledgeMode KnowledgeMode @default(notes_only)
+  aiProvider    AiProvider    @default(mock)
+  confidence    Float?
+  createdAt     DateTime      @default(now())
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course        Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  citations     Citation[]
+
+  @@index([userId, type, createdAt])
+}
+
+model Citation {
+  id           String      @id @default(cuid())
+  artifactId   String
+  uploadId     String
+  uploadPageId String?
+  pageNumber   Int?
+  sectionTitle String?
+  snippet      String
+  artifact     Artifact    @relation(fields: [artifactId], references: [id], onDelete: Cascade)
+  upload       Upload      @relation(fields: [uploadId], references: [id], onDelete: Cascade)
+  uploadPage   UploadPage? @relation(fields: [uploadPageId], references: [id], onDelete: SetNull)
+
+  @@index([artifactId])
+}
+
+model StudyActivity {
+  id        String            @id @default(cuid())
+  userId    String
+  courseId  String
+  kind      StudyActivityKind
+  label     String
+  minutes   Int               @default(0)
+  metadata  Json?
+  createdAt DateTime          @default(now())
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course    Course            @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model StudyGroup {
+  id          String               @id @default(cuid())
+  name        String
+  slug        String               @unique
+  description String?
+  topic       String
+  visibility  StudyGroupVisibility @default(private)
+  ownerId     String
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  owner       User                 @relation("StudyGroupOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  members     StudyGroupMember[]
+  messages    GroupMessage[]
+  calls       GroupCallRoom[]
+
+  @@index([ownerId, createdAt])
+}
+
+model StudyGroupMember {
+  id        String         @id @default(cuid())
+  groupId   String
+  userId    String
+  role      StudyGroupRole @default(member)
+  joinedAt  DateTime       @default(now())
+  group     StudyGroup     @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user      User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+  @@index([userId, joinedAt])
+}
+
+model GroupMessage {
+  id        String     @id @default(cuid())
+  groupId   String
+  authorId  String
+  content   String
+  createdAt DateTime   @default(now())
+  group     StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  author    User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@index([groupId, createdAt])
+}
+
+model GroupCallRoom {
+  id          String     @id @default(cuid())
+  groupId      String
+  createdById  String
+  title        String
+  roomName     String     @unique
+  joinUrl      String
+  mode         CallMode   @default(video)
+  isActive     Boolean    @default(true)
+  createdAt    DateTime   @default(now())
+  group        StudyGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  createdBy    User       @relation("GroupCallCreator", fields: [createdById], references: [id], onDelete: Cascade)
+
+  @@index([groupId, createdAt])
+}
