@@ -13,6 +13,15 @@ import {
 import { prisma } from "@/lib/prisma";
 
 export const PRIMARY_COURSE_ID = "course_industrial_chemistry";
+const PRIMARY_COURSE_DEFAULTS = {
+  title: "Industrial Chemistry",
+  code: "ICH 204",
+  description:
+    "Core Industrial Chemistry workspace with kinetics, thermodynamics, electrochemistry, practicals, and revision support.",
+  semester: "Year 2 Semester 2",
+  level: "Undergraduate",
+  colorKey: "chemate-cyan",
+} as const;
 
 export type UploadDraft = {
   title: string;
@@ -182,6 +191,8 @@ async function trackActivity(
   minutes = 0,
   metadata?: Prisma.InputJsonValue,
 ) {
+  await ensurePrimaryCourse();
+
   await prisma.studyActivity.create({
     data: {
       userId,
@@ -194,12 +205,23 @@ async function trackActivity(
   });
 }
 
-export async function getHomeCourse() {
-  return prisma.course.findUniqueOrThrow({
+async function ensurePrimaryCourse() {
+  return prisma.course.upsert({
     where: {
       id: PRIMARY_COURSE_ID,
     },
+    update: {
+      ...PRIMARY_COURSE_DEFAULTS,
+    },
+    create: {
+      id: PRIMARY_COURSE_ID,
+      ...PRIMARY_COURSE_DEFAULTS,
+    },
   });
+}
+
+export async function getHomeCourse() {
+  return ensurePrimaryCourse();
 }
 
 async function reserveUniqueUsername(baseInput: string, currentUserId?: string) {
@@ -630,10 +652,12 @@ export async function createArtifactWithCitations(args: {
   confidence?: number;
   citations?: CitationPayload[];
 }) {
+  const course = await ensurePrimaryCourse();
+
   const artifact = await prisma.artifact.create({
     data: {
       userId: args.userId,
-      courseId: PRIMARY_COURSE_ID,
+      courseId: course.id,
       type: args.type,
       title: args.title,
       prompt: args.prompt,
@@ -908,6 +932,7 @@ export async function createStudentUser(args: {
   avatarUrl?: string;
   school?: string;
 }) {
+  const course = await ensurePrimaryCourse();
   const username = await reserveUniqueUsername(
     args.username ?? args.email.split("@")[0] ?? args.name,
   );
@@ -931,7 +956,7 @@ export async function createStudentUser(args: {
   await prisma.enrollment.create({
     data: {
       userId: user.id,
-      courseId: PRIMARY_COURSE_ID,
+      courseId: course.id,
     },
   });
 
